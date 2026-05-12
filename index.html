@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Leadership Tour | MariaC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rock-black: #121212;
+            --gold: #d4af37;
+            --white: #ffffff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--rock-black);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Pantalla de Inicio */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&q=80&w=2070') center/cover;
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+        }
+
+        .play-btn {
+            background: none;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 2rem;
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            background: var(--gold);
+            color: var(--rock-black);
+            transform: scale(1.1);
+        }
+
+        /* Sección Oculta (Carta y Trivia) */
+        #content {
+            display: none;
+            padding: 50px 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .letter-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-left: 5px solid var(--gold);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .trivia-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .btn-choice {
+            background: var(--gold);
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero" id="hero">
+        <h1 id="leader-name">MARIA CECILIA</h1>
+        <p class="subtitle">Líder, Inspiración y Frontwoman de este equipo</p>
+        <button class="play-btn" onclick="startExperience()">▶</button>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">Sube el volumen y dale Play</p>
+    </section>
+
+    <div id="content">
+        <div class="letter-card">
+            <p><strong>Querida MariaC,</strong></p>
+            <p>En este primer cuatrimestre, más que indicadores, hemos visto <strong>liderazgo puro</strong>. Al igual que en una banda de rock, la armonía solo se logra cuando hay una directora que confía en sus músicos...</p>
+            <p>Gracias por ser esa líder cercana que protege nuestro bienestar y nos inspira a tocar las notas más altas.</p>
+        </div>
+
+        <div class="trivia-section">
+            <h3>🎸 ROCK TRIVIA: ¿Qué pilar del liderazgo define nuestro éxito hoy?</h3>
+            <button class="btn-choice" onclick="answer('Confianza')">A. Confianza</button>
+            <button class="btn-choice" onclick="answer('Cercanía')">B. Cercanía</button>
+            <button class="btn-choice" onclick="answer('Todas')">C. Todas las anteriores</button>
+            <p id="feedback"></p>
+        </div>
+    </div>
+
+    <!-- Audio oculto (puedes cambiar la URL por tu canción favorita de rock) -->
+    <audio id="rock-anthem" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+    <script>
+        function startExperience() {
+            document.getElementById('hero').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('rock-anthem').play();
+        }
+
+        function answer(choice) {
+            const feedback = document.getElementById('feedback');
+            if(choice === 'Todas') {
+                feedback.innerHTML = "¡Exacto! Bajo tu guía, somos una banda completa. 🤘";
+                feedback.style.color = "#d4af37";
+            } else {
+                feedback.innerHTML = "¡Sí! Pero hay mucho más gracias a ti.";
+            }
+        }
+    </script>
+</body>
+</html>
