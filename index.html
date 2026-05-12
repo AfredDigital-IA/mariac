@@ -3,141 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Leadership Tour | MariaC</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    <title>Liderazgo Inspirador | MariaC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
         :root {
-            --rock-black: #121212;
             --gold: #d4af37;
+            --black: #1a1a1a;
             --white: #ffffff;
+            --gray: #f4f4f4;
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: var(--rock-black);
-            color: var(--white);
-            font-family: 'Montserrat', sans-serif;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--gray);
+            color: var(--black);
             overflow-x: hidden;
         }
 
-        /* Pantalla de Inicio */
-        .hero {
-            height: 100vh;
+        /* Contenedor de Diapositivas */
+        .presentation-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+            padding: 40px 0;
+        }
+
+        .slide {
+            width: 95%;
+            max-width: 1200px;
+            height: 80vh;
+            min-height: 600px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            padding: 60px;
+        }
+
+        /* Estilos de Texto */
+        h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; margin-bottom: 20px; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; border-left: 5px solid var(--gold); padding-left: 20px; margin-bottom: 30px; }
+        p { font-size: 1.2rem; line-height: 1.6; color: #555; font-weight: 300; }
+        .accent { color: var(--gold); font-weight: 600; }
+
+        /* Botón Play Inicio */
+        .play-trigger {
+            width: 100px;
+            height: 100px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 30px;
+        }
+        .play-trigger:hover { transform: scale(1.1); background: var(--gold); color: var(--white); }
+
+        /* Layout Misión (Foto Derecha) */
+        .grid-mission {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .mission-img {
+            width: 100%;
+            height: 450px;
+            background: #eee;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* Cualidades */
+        .qualities-list { list-style: none; margin-top: 20px; }
+        .qualities-list li { margin-bottom: 25px; padding-left: 20px; border-left: 2px solid var(--gold); }
+        .qualities-list li strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+
+        /* Trivia */
+        .trivia-card {
+            background: var(--black);
+            color: var(--white);
+            padding: 40px;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&q=80&w=2070') center/cover;
+            border-radius: 8px;
         }
-
-        h1 {
-            font-size: 5rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
+        .option-btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
         }
+        .option-btn:hover { background: var(--gold); color: var(--black); }
 
-        .subtitle {
+        /* Footer Mensaje */
+        .final-quote {
+            text-align: center;
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 1.5rem;
-            color: var(--gold);
-            margin-bottom: 30px;
-        }
-
-        .play-btn {
-            background: none;
-            border: 2px solid var(--gold);
-            color: var(--gold);
-            padding: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 2rem;
-            transition: all 0.3s;
-        }
-
-        .play-btn:hover {
-            background: var(--gold);
-            color: var(--rock-black);
-            transform: scale(1.1);
-        }
-
-        /* Sección Oculta (Carta y Trivia) */
-        #content {
-            display: none;
-            padding: 50px 20px;
+            font-size: 2.2rem;
             max-width: 800px;
-            margin: auto;
+            margin: 0 auto;
         }
 
-        .letter-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-left: 5px solid var(--gold);
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        .trivia-section {
-            margin-top: 50px;
-            text-align: center;
-        }
-
-        .btn-choice {
-            background: var(--gold);
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 5px;
+        @media (max-width: 768px) {
+            .grid-mission { grid-template-columns: 1fr; }
+            .slide { height: auto; padding: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <section class="hero" id="hero">
-        <h1 id="leader-name">MARIA CECILIA</h1>
-        <p class="subtitle">Líder, Inspiración y Frontwoman de este equipo</p>
-        <button class="play-btn" onclick="startExperience()">▶</button>
-        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">Sube el volumen y dale Play</p>
-    </section>
+    <audio id="bgMusic" src="TU_CAN_CION_AQUI.mp3"></audio>
 
-    <div id="content">
-        <div class="letter-card">
-            <p><strong>Querida MariaC,</strong></p>
-            <p>En este primer cuatrimestre, más que indicadores, hemos visto <strong>liderazgo puro</strong>. Al igual que en una banda de rock, la armonía solo se logra cuando hay una directora que confía en sus músicos...</p>
-            <p>Gracias por ser esa líder cercana que protege nuestro bienestar y nos inspira a tocar las notas más altas.</p>
-        </div>
+    <div class="presentation-wrapper">
 
-        <div class="trivia-section">
-            <h3>🎸 ROCK TRIVIA: ¿Qué pilar del liderazgo define nuestro éxito hoy?</h3>
-            <button class="btn-choice" onclick="answer('Confianza')">A. Confianza</button>
-            <button class="btn-choice" onclick="answer('Cercanía')">B. Cercanía</button>
-            <button class="btn-choice" onclick="answer('Todas')">C. Todas las anteriores</button>
-            <p id="feedback"></p>
-        </div>
+        <section class="slide" id="inicio" style="text-align: center; align-items: center;">
+            <p class="accent" style="letter-spacing: 3px; text-transform: uppercase;">Liderazgo que Inspira</p>
+            <h1>MARIA CECILIA</h1>
+            <p style="max-width: 600px;">Gracias por guiarnos con confianza y cercanía en este primer cuatrimestre.</p>
+            <div class="play-trigger" onclick="toggleMusic()">
+                <i class="fa-solid fa-play" id="playIcon"></i>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.5;">CLIC PARA INICIAR MÚSICA</p>
+        </section>
+
+        <section class="slide">
+            <h2>Nuestra Conexión</h2>
+            <div class="grid-mission">
+                <div>
+                    <p>Nos conectamos con la <strong>declaratoria de liderazgo</strong> del banco a través de tu ejemplo. No es solo cumplir metas, es cómo las logramos juntos.</p>
+                    <p style="margin-top: 20px;">Tu visión estratégica ha convertido los desafíos de este inicio de año en oportunidades de crecimiento para toda la regional.</p>
+                </div>
+                <img src="URL_DE_TU_FOTO_1" alt="Liderazgo MariaC" class="mission-img">
+            </div>
+        </section>
+
+        <section class="slide" style="background: var(--black); color: var(--white);">
+            <h2 style="color: var(--white);">Tu Sello Personal</h2>
+            <div class="grid-mission">
+                <ul class="qualities-list">
+                    <li>
+                        <strong>Confianza Absoluta</strong>
+                        <p style="color: #ccc;">Nos empoderas para tomar decisiones y ser protagonistas.</p>
+                    </li>
+                    <li>
+                        <strong>Liderazgo Cercano</strong>
+                        <p style="color: #ccc;">Siempre presente, escuchando y construyendo desde la empatía.</p>
+                    </li>
+                    <li>
+                        <strong>Protección del Bienestar</strong>
+                        <p style="color: #ccc;">Tu prioridad siempre ha sido el equipo como seres humanos.</p>
+                    </li>
+                </ul>
+                <img src="URL_DE_TU_FOTO_2" alt="Cualidades" class="mission-img" style="border: 1px solid var(--gold);">
+            </div>
+        </section>
+
+        <section class="slide">
+            <h2>Momento de Juego</h2>
+            <div class="trivia-card">
+                <h3 style="font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 20px;">¿Cuál ha sido nuestro mayor logro este cuatrimestre?</h3>
+                <div class="option-btn" onclick="checkAnswer('A')">A. Superar las metas comerciales</div>
+                <div class="option-btn" onclick="checkAnswer('B')">B. Fortalecer nuestra unión</div>
+                <div class="option-btn" onclick="checkAnswer('C')">C. ¡Ambas con tu liderazgo!</div>
+                <p id="trivia-feedback" style="margin-top: 20px; color: var(--gold); height: 30px;"></p>
+            </div>
+        </section>
+
+        <section class="slide" style="text-align: center; align-items: center; background: radial-gradient(circle, #fff 0%, #f9f9f9 100%);">
+            <h2 style="border: none; padding: 0;">Mensaje del Equipo</h2>
+            <div style="width: 100%; max-width: 700px; height: 350px; background: #000; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 30px; border-radius: 8px;">
+                <i class="fa-solid fa-video" style="font-size: 50px; opacity: 0.3;"></i>
+                <p style="position: absolute;">[Carga aquí el video del equipo]</p>
+            </div>
+            <div class="final-quote">
+                "Gracias por hacernos creer que podemos lograr grandes cosas."
+            </div>
+            <p class="accent" style="margin-top: 20px;">CON CARIÑO, TU EQUIPO REGIONAL</p>
+        </section>
+
     </div>
 
-    <!-- Audio oculto (puedes cambiar la URL por tu canción favorita de rock) -->
-    <audio id="rock-anthem" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-
     <script>
-        function startExperience() {
-            document.getElementById('hero').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-            document.getElementById('rock-anthem').play();
+        // Función para la música
+        function toggleMusic() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('playIcon');
+            if (audio.paused) {
+                audio.play();
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+            } else {
+                audio.pause();
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+            }
         }
 
-        function answer(choice) {
-            const feedback = document.getElementById('feedback');
-            if(choice === 'Todas') {
-                feedback.innerHTML = "¡Exacto! Bajo tu guía, somos una banda completa. 🤘";
-                feedback.style.color = "#d4af37";
+        // Función para la Trivia
+        function checkAnswer(option) {
+            const feedback = document.getElementById('trivia-feedback');
+            if(option === 'C') {
+                feedback.innerHTML = "¡Exacto! Somos un equipo imparable bajo tu guía. 🚀";
             } else {
-                feedback.innerHTML = "¡Sí! Pero hay mucho más gracias a ti.";
+                feedback.innerHTML = "¡Muy cerca! Pero la respuesta correcta es la C.";
             }
         }
     </script>
