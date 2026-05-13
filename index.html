@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liderazgo Inspirador | MariaC</title>
+    <title>Experiencia de Liderazgo | MariaC</title>
+    <!-- Fuentes Corporativas de Alto Nivel -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -12,217 +13,306 @@
             --gold: #d4af37;
             --black: #1a1a1a;
             --white: #ffffff;
-            --gray: #f4f4f4;
+            --gray: #f8f9fa;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--gray);
+            background-color: var(--white);
             color: var(--black);
-            overflow-x: hidden;
+            /* Bloqueamos el scroll inicialmente para la sorpresa */
+            overflow: hidden; 
+            transition: background-color 0.5s ease;
         }
 
-        /* Contenedor de Diapositivas */
-        .presentation-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 50px;
-            padding: 40px 0;
-        }
-
-        .slide {
-            width: 95%;
-            max-width: 1200px;
-            height: 80vh;
-            min-height: 600px;
+        /* --- PANTALLA DE BIENVENIDA (EL TELÓN) --- */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
             background: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 60px;
+            align-items: center;
+            z-index: 1000;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* Estilos de Texto */
-        h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; margin-bottom: 20px; }
-        h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; border-left: 5px solid var(--gold); padding-left: 20px; margin-bottom: 30px; }
-        p { font-size: 1.2rem; line-height: 1.6; color: #555; font-weight: 300; }
-        .accent { color: var(--gold); font-weight: 600; }
+        #welcome-screen h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
 
-        /* Botón Play Inicio */
+        .welcome-msg {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 500px;
+            font-weight: 300;
+        }
+
         .play-trigger {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border: 1px solid var(--gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 35px;
+            color: var(--gold);
             cursor: pointer;
-            transition: 0.3s;
-            margin-top: 30px;
+            transition: all 0.4s ease;
+            background: transparent;
         }
-        .play-trigger:hover { transform: scale(1.1); background: var(--gold); color: var(--white); }
 
-        /* Layout Misión (Foto Derecha) */
-        .grid-mission {
+        .play-trigger:hover {
+            background: var(--gold);
+            color: var(--white);
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- CONTENIDO DE LA PRESENTACIÓN (OCULTO AL INICIO) --- */
+        #main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+            padding-top: 50px;
+            background: var(--gray);
+        }
+
+        .presentation-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 80px;
+            padding-bottom: 100px;
+        }
+
+        .slide {
+            width: 90%;
+            max-width: 1100px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 80px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.8rem; 
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .grid-layout {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
             align-items: center;
         }
-        .mission-img {
+
+        .img-placeholder {
             width: 100%;
             height: 450px;
             background: #eee;
+            border-radius: 8px;
             object-fit: cover;
-            border-radius: 4px;
         }
 
-        /* Cualidades */
-        .qualities-list { list-style: none; margin-top: 20px; }
-        .qualities-list li { margin-bottom: 25px; padding-left: 20px; border-left: 2px solid var(--gold); }
-        .qualities-list li strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+        /* Cualidades Estilo Ejecutivo */
+        .qualities {
+            list-style: none;
+        }
+
+        .quality-item {
+            margin-bottom: 30px;
+        }
+
+        .quality-item strong {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            display: block;
+            color: var(--gold);
+        }
 
         /* Trivia */
-        .trivia-card {
+        .trivia-box {
             background: var(--black);
             color: var(--white);
-            padding: 40px;
+            padding: 60px;
             text-align: center;
-            border-radius: 8px;
+            border-radius: 12px;
         }
+
         .option-btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 15px 30px;
             border: 1px solid var(--gold);
-            color: var(--gold);
-            text-decoration: none;
+            padding: 15px 35px;
+            margin: 10px;
+            display: inline-block;
             cursor: pointer;
             transition: 0.3s;
+            color: var(--gold);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
-        .option-btn:hover { background: var(--gold); color: var(--black); }
 
-        /* Footer Mensaje */
-        .final-quote {
+        .option-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .final-message {
             text-align: center;
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 2.2rem;
-            max-width: 800px;
-            margin: 0 auto;
+            font-size: 2.5rem;
+            margin: 40px 0;
         }
 
+        /* Responsivo */
         @media (max-width: 768px) {
-            .grid-mission { grid-template-columns: 1fr; }
-            .slide { height: auto; padding: 30px; }
+            .grid-layout { grid-template-columns: 1fr; }
+            .slide { padding: 40px 20px; }
+            #welcome-screen h1 { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" src="TU_CAN_CION_AQUI.mp3"></audio>
+    <!-- Música de fondo (Ajusta la URL por tu canción) -->
+    <audio id="background-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+    </audio>
 
-    <div class="presentation-wrapper">
-
-        <section class="slide" id="inicio" style="text-align: center; align-items: center;">
-            <p class="accent" style="letter-spacing: 3px; text-transform: uppercase;">Liderazgo que Inspira</p>
-            <h1>MARIA CECILIA</h1>
-            <p style="max-width: 600px;">Gracias por guiarnos con confianza y cercanía en este primer cuatrimestre.</p>
-            <div class="play-trigger" onclick="toggleMusic()">
-                <i class="fa-solid fa-play" id="playIcon"></i>
-            </div>
-            <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.5;">CLIC PARA INICIAR MÚSICA</p>
-        </section>
-
-        <section class="slide">
-            <h2>Nuestra Conexión</h2>
-            <div class="grid-mission">
-                <div>
-                    <p>Nos conectamos con la <strong>declaratoria de liderazgo</strong> del banco a través de tu ejemplo. No es solo cumplir metas, es cómo las logramos juntos.</p>
-                    <p style="margin-top: 20px;">Tu visión estratégica ha convertido los desafíos de este inicio de año en oportunidades de crecimiento para toda la regional.</p>
-                </div>
-                <img src="URL_DE_TU_FOTO_1" alt="Liderazgo MariaC" class="mission-img">
-            </div>
-        </section>
-
-        <section class="slide" style="background: var(--black); color: var(--white);">
-            <h2 style="color: var(--white);">Tu Sello Personal</h2>
-            <div class="grid-mission">
-                <ul class="qualities-list">
-                    <li>
-                        <strong>Confianza Absoluta</strong>
-                        <p style="color: #ccc;">Nos empoderas para tomar decisiones y ser protagonistas.</p>
-                    </li>
-                    <li>
-                        <strong>Liderazgo Cercano</strong>
-                        <p style="color: #ccc;">Siempre presente, escuchando y construyendo desde la empatía.</p>
-                    </li>
-                    <li>
-                        <strong>Protección del Bienestar</strong>
-                        <p style="color: #ccc;">Tu prioridad siempre ha sido el equipo como seres humanos.</p>
-                    </li>
-                </ul>
-                <img src="URL_DE_TU_FOTO_2" alt="Cualidades" class="mission-img" style="border: 1px solid var(--gold);">
-            </div>
-        </section>
-
-        <section class="slide">
-            <h2>Momento de Juego</h2>
-            <div class="trivia-card">
-                <h3 style="font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 20px;">¿Cuál ha sido nuestro mayor logro este cuatrimestre?</h3>
-                <div class="option-btn" onclick="checkAnswer('A')">A. Superar las metas comerciales</div>
-                <div class="option-btn" onclick="checkAnswer('B')">B. Fortalecer nuestra unión</div>
-                <div class="option-btn" onclick="checkAnswer('C')">C. ¡Ambas con tu liderazgo!</div>
-                <p id="trivia-feedback" style="margin-top: 20px; color: var(--gold); height: 30px;"></p>
-            </div>
-        </section>
-
-        <section class="slide" style="text-align: center; align-items: center; background: radial-gradient(circle, #fff 0%, #f9f9f9 100%);">
-            <h2 style="border: none; padding: 0;">Mensaje del Equipo</h2>
-            <div style="width: 100%; max-width: 700px; height: 350px; background: #000; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 30px; border-radius: 8px;">
-                <i class="fa-solid fa-video" style="font-size: 50px; opacity: 0.3;"></i>
-                <p style="position: absolute;">[Carga aquí el video del equipo]</p>
-            </div>
-            <div class="final-quote">
-                "Gracias por hacernos creer que podemos lograr grandes cosas."
-            </div>
-            <p class="accent" style="margin-top: 20px;">CON CARIÑO, TU EQUIPO REGIONAL</p>
-        </section>
-
+    <!-- PANTALLA 1: EL INICIO (LO ÚNICO QUE SE VE) -->
+    <div id="welcome-screen">
+        <p style="color: var(--gold); letter-spacing: 4px; font-weight: 600; margin-bottom: 10px;">LIDERAZGO BANCARIO</p>
+        <h1>MARIA CECILIA</h1>
+        <p class="welcome-msg">Tu liderazgo cercano es el motor de este equipo. Tenemos un mensaje para ti en este primer cuatrimestre.</p>
+        <button class="play-trigger" onclick="startExperience()">
+            <i class="fa-solid fa-play"></i>
+        </button>
+        <p style="margin-top: 20px; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.6;">DALE PLAY PARA COMENZAR</p>
     </div>
 
+    <!-- PANTALLA 2: EL CONTENIDO (SE ACTIVA CON EL PLAY) -->
+    <main id="main-content">
+        <div class="presentation-wrapper">
+
+            <!-- Diapositiva: Misión y Conexión -->
+            <section class="slide">
+                <div class="grid-layout">
+                    <div>
+                        <h2>Nuestra Conexión</h2>
+                        <p>Nos inspiras a través de la <strong>declaratoria de liderazgo</strong>. No se trata solo de números, sino de la confianza que depositas en cada uno de nosotros.</p>
+                        <p style="margin-top: 20px;">Este cuatrimestre ha sido el reflejo de una gestión basada en la excelencia y la protección de nuestro bienestar.</p>
+                    </div>
+                    <!-- Reemplaza con la foto de MariaC -->
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop" alt="Liderazgo" class="img-placeholder">
+                </div>
+            </section>
+
+            <!-- Diapositiva: Cualidades -->
+            <section class="slide" style="border-left: 8px solid var(--gold);">
+                <div class="grid-layout">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="Equipo" class="img-placeholder">
+                    <div>
+                        <h2>Tu Sello Único</h2>
+                        <div class="qualities">
+                            <div class="quality-item">
+                                <strong>Confianza</strong>
+                                <p>Crees en nuestras capacidades antes que nosotros mismos.</p>
+                            </div>
+                            <div class="quality-item">
+                                <strong>Cercanía</strong>
+                                <p>Un liderazgo de puertas abiertas y escucha activa.</p>
+                            </div>
+                            <div class="quality-item">
+                                <strong>Inspiración</strong>
+                                <p>Nos motivas a superar los límites de la regional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Diapositiva: Trivia Dinámica -->
+            <section class="slide">
+                <div class="trivia-box">
+                    <h2 style="color: white; border: none;">¿Cuál es el secreto de nuestro equipo?</h2>
+                    <p style="color: #aaa; margin-bottom: 30px;">Selecciona una opción para descubrirlo</p>
+                    <div class="option-btn" onclick="revealTrivia('A')">A. La Estrategia</div>
+                    <div class="option-btn" onclick="revealTrivia('B')">B. El Talento</div>
+                    <div class="option-btn" onclick="revealTrivia('C')">C. Tu Liderazgo</div>
+                    <p id="trivia-result" style="margin-top: 30px; font-size: 1.5rem; color: var(--gold); min-height: 40px;"></p>
+                </div>
+            </section>
+
+            <!-- Diapositiva Final: Video y Gratitud -->
+            <section class="slide" style="text-align: center;">
+                <h2>Gracias por todo, MariaC</h2>
+                <div style="background: #000; width: 100%; height: 400px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 40px;">
+                    <!-- Aquí irá el video que cargues -->
+                    <p style="color: white; opacity: 0.5;"><i class="fa-solid fa-video"></i> [Video del Equipo Preparándose]</p>
+                </div>
+                <div class="final-message">
+                    "Gracias a tu guía, logramos grandes cosas."
+                </div>
+                <p style="letter-spacing: 3px; font-weight: 600; color: var(--gold);">CON ADMIRACIÓN, TU EQUIPO</p>
+            </section>
+
+        </div>
+    </main>
+
     <script>
-        // Función para la música
-        function toggleMusic() {
-            var audio = document.getElementById('bgMusic');
-            var icon = document.getElementById('playIcon');
-            if (audio.paused) {
-                audio.play();
-                icon.classList.remove('fa-play');
-                icon.classList.add('fa-pause');
-            } else {
-                audio.pause();
-                icon.classList.remove('fa-pause');
-                icon.classList.add('fa-play');
-            }
+        function startExperience() {
+            // 1. Iniciar música
+            const music = document.getElementById('background-music');
+            music.play();
+
+            // 2. Desplazar la pantalla de bienvenida hacia arriba (efecto telón)
+            const welcome = document.getElementById('welcome-screen');
+            welcome.style.transform = 'translateY(-100%)';
+
+            // 3. Mostrar el contenido principal con suavidad
+            const main = document.getElementById('main-content');
+            main.style.opacity = '1';
+
+            // 4. Habilitar el scroll del cuerpo
+            document.body.style.overflow = 'auto';
+            document.body.style.backgroundColor = 'var(--gray)';
         }
 
-        // Función para la Trivia
-        function checkAnswer(option) {
-            const feedback = document.getElementById('trivia-feedback');
+        function revealTrivia(option) {
+            const result = document.getElementById('trivia-result');
             if(option === 'C') {
-                feedback.innerHTML = "¡Exacto! Somos un equipo imparable bajo tu guía. 🚀";
+                result.innerText = "¡Correcto! Eres la brújula que nos hace brillar. ✨";
             } else {
-                feedback.innerHTML = "¡Muy cerca! Pero la respuesta correcta es la C.";
+                result.innerText = "Es una parte, ¡pero tú eres el ingrediente principal!";
             }
         }
     </script>
